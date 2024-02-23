@@ -1,0 +1,157 @@
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center; /* 中央揃え */
+  font-size: larger;
+  font-weight: 900;
+  background-image: url(./img/IMG_1343.jpg);
+}
+
+h1 {
+  color: #fff;
+  font-size: 300%;
+  font-family: "Amatic SC", cursive;
+}
+
+h2 {
+  color: lemonchiffon;
+  font-family: "Mplus 1p";
+  font-size: 32px;
+}
+header {
+  text-align: center;
+  margin-top: 100px;
+}
+
+main {
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+h3 {
+  color: darkslategrey;
+  font-size: 25px;
+}
+/* 写真の選択肢を横に並べる*/
+
+.fishing_btn {
+  display: flex;
+  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  justify-content: space-around;
+  list-style: none;
+  margin: 40px;
+}
+
+#first {
+  margin-top: 100px;
+}
+
+/* カーソルが画像にならない。。 */
+.fishing_box1 {
+  cursor: url(./img/sakana_cursor.png), pointer;
+}
+.fishing_box2 {
+  cursor: url(./img/sakana_cursor.png), pointer;
+}
+.fishing_box3 {
+  cursor: url(./img/sakana_cursor.png), pointer;
+}
+
+.rod1 {
+  cursor: url(./img/sakana_cursor.png), pointer;
+}
+.rod2 {
+  cursor: url(./img/sakana_cursor.png), pointer;
+}
+.rod3 {
+  cursor: url(./img/sakana_cursor.png), pointer;
+}
+.rod4 {
+  cursor: url(./img/sakana_cursor.png), pointer;
+}
+.rod5 {
+  cursor: url(./img/sakana_cursor.png), pointer;
+}
+.rod6 {
+  cursor: url(./img/sakana_cursor.png), pointer;
+}
+
+/* hover回転させたい */
+.kaitenY {
+  transition: 0.5s;
+  transform: rotateY(0deg);
+}
+li:hover .kaitenY {
+  transform: rotateY(360deg);
+}
+
+/* 釣りタイプの画面を下に下げる */
+#pattern_a {
+  margin-top: 100px;
+}
+#pattern_b {
+  margin-top: 100px;
+}
+#pattern_c {
+  margin-top: 100px;
+}
+
+/* 釣りタイプ、hoverで説明浮き出るようにならないか？余裕があればトライ */
+
+/* 魚のサイズ変更 が効かない。。*/
+#fish_img {
+  margin: 30px;
+  width: 300px;
+  height: auto;
+}
+
+#fishname {
+  font-size: 36px;
+}
+
+.kekka {
+  color: crimson;
+  font-size: x-large;
+}
+
+#fish_point {
+  color: crimson;
+  font-size: x-large;
+}
+
+#total_box {
+  margin-top: 50px;
+}
+
+#total {
+  font-size: 70px;
+}
+
+#retry_btn {
+  width: 120px;
+  height: 40px;
+  background-color: #fafad2;
+  color: #00cde1;
+  font-weight: bold;
+  margin-bottom: 100px;
+}
+
+#reset_btn {
+  width: 120px;
+  height: 40px;
+  background-color: #fafad2;
+  color: #dda0dd;
+  font-weight: bold;
+  margin-bottom: 100px;
+}
+
+#button {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tokuten {
+  font-size: 40px;
+  margin-top: -10px;
+}

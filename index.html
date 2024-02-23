@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="janken_rich.css" />
+    <title>Fishing Game</title>
+    <link href=“https://fonts.googleapis.com/earlyaccess/mplus1p.css”
+    rel=“stylesheet” />
+    <link rel="icon" href="favicon.ico" id="favicon" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Fishing Game</h1>
+      <h2>ビッグフィッシュをねらえ！</h2>
+    </header>
+
+    <!-- 最初の表示画面 -->
+    <main>
+      <div id="first">
+        <h3>釣りスタイルを選んでね</h3>
+
+        <ul class="fishing_btn">
+          <!-- ボタンのイラストと説明をulでリスト化 -->
+          <li class="fishing_box1">
+            <img
+              class="kaitenY"
+              src="img/bouhatei.png"
+              alt="防波堤釣り"
+              width="300px"
+              height="auto"
+            />
+            <h3 class="fishing_name">防波堤釣り</h3>
+          </li>
+
+          <li class="fishing_box2">
+            <img
+              class="kaitenY"
+              src="img/beach.png"
+              alt="ビーチ釣り"
+              width="300px"
+              height="auto"
+            />
+            <h3 class="fishing_name">ビーチ釣り</h3>
+          </li>
+
+          <li class="fishing_box3">
+            <img
+              class="kaitenY"
+              src="img/boat.png"
+              alt="ボート釣り"
+              width="300px"
+              height="auto"
+            />
+            <h3 class="fishing_name">湖ボート釣り</h3>
+          </li>
+        </ul>
+      </div>
+
+      <!-- /* 防波堤を選んだ時にでてくる釣り竿セレクト */ -->
+      <div id="pattern_a">
+        <h3>釣り竿タイプを選んでね</h3>
+
+        <ul class="fishing_btn">
+          <!-- ボタンのイラストと説明をulでリスト化 -->
+
+          <li class="rod1">
+            <img
+              class="kaitenY"
+              src="img/sabiki.png"
+              alt="さびき釣り"
+              width="300px"
+              height="auto"
+            />
+            <h3 class="fishing_name">さびき釣り</h3>
+          </li>
+
+          <li class="rod2">
+            <img
+              class="kaitenY"
+              src="img/uki.png"
+              alt="浮き釣り"
+              width="300px"
+              height="auto"
+            />
+            <h3 class="fishing_name">浮き釣り</h3>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ビーチを選んだ時にでてくる釣り竿セレクト -->
+
+      <div id="pattern_b">
+        <h3>釣り竿タイプを選んでね</h3>
+
+        <ul class="fishing_btn">
+          <!-- ボタンのイラストと説明をulでリスト化 -->
+
+          <li class="rod3">
+            <img
+              class="kaitenY"
+              src="img/throw.png"
+              alt="投げ釣り"
+              width="300px"
+              height="auto"
+            />
+            <h3 class="fishing_name">投げ釣り</h3>
+          </li>
+
+          <li class="rod4">
+            <img
+              class="kaitenY"
+              src="img/lure.png"
+              alt="ルアー釣り"
+              width="300px"
+              height="auto"
+            />
+            <h3 class="fishing_name">ルアー釣り</h3>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 湖ボートを選んだ時にでてくる釣り竿セレクト -->
+
+      <div id="pattern_c">
+        <h3>釣り竿タイプを選んでね</h3>
+
+        <ul class="fishing_btn">
+          <!-- ボタンのイラストと説明をulでリスト化 -->
+
+          <li class="rod5">
+            <img
+              class="kaitenY"
+              src="img/sabiki.png"
+              alt="さびき釣り"
+              width="300px"
+              height="auto"
+            />
+            <h3 class="fishing_name">さびき釣り</h3>
+          </li>
+
+          <li class="rod6">
+            <img
+              class="kaitenY"
+              src="img/lure.png"
+              alt="ルアー釣り"
+              width="300px"
+              height="auto"
+            />
+            <h3 class="fishing_name">ルアー釣り</h3>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 得点表示 -->
+      <div id="point">
+        <h3>釣れたのは。。。</h3>
+        <div><span id="fishname">さかな</span></div>
+        <div><span id="fish_img">イラスト</span></div>
+        <div class="kekka">
+          GET! 「<span id="fish_point">００ポイント！！！</span>」
+        </div>
+        <div id="total_box">
+          <div id="total">000</div>
+          <p class="tokuten">トータルポイント🐟</p>
+        </div>
+      </div>
+
+      <!-- リトライボタンとリセットボタン -->
+
+      <div class="button">
+        <button id="retry_btn">RETRY!</button>
+        <!-- <button id="reset_btn">RESET!</button> -->
+        <button id="reset_btn">RESET!</button>
+      </div>
+    </main>
+
+    <footer></footer>
+
+    <script>
+      let total = 0;
+
+      // 魚、釣り竿など最初の画面で隠しておく
+      $("#pattern_a").hide();
+      $("#pattern_b").hide();
+      $("#pattern_c").hide();
+      $("#point").hide();
+      $(".button").hide();
+
+      // 釣りスタイルボックスを選んだ場合、first画面が消えて釣り竿タイプ選択肢が出てくる
+      $(".fishing_box1").on("click", function () {
+        $("#first").hide();
+        $("#pattern_a").show();
+      });
+
+      $(".fishing_box2").on("click", function () {
+        $("#first").hide();
+        $("#pattern_b").show();
+      });
+
+      $(".fishing_box3").on("click", function () {
+        $("#first").hide();
+        $("#pattern_c").show();
+      });
+
+      // rod1を選んだ場合、コンピュータが出す3通り
+
+      $(".rod1").on("click", function () {
+        $("#pattern_a").hide();
+        $("#point").show();
+        $(".button").show();
+
+        // 魚が出る確率を変える
+        let r = Math.ceil(Math.random() * 100);
+        let fishname = "";
+        let fish_img = "";
+
+        if (0 < r && r <= 30) {
+          // alert("アジ");
+          // 得点をtotalに追加する
+          $("#total").text((total += 5));
+          fishname = "アジ";
+          fish_img = '<img src="img/Aji.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("５ポイント！！！");
+        } else if (30 < r && r <= 60) {
+          $("#total").text((total += 2));
+          fishname = "イワシ";
+          fish_img = '<img src="img/iwashi.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("２ポイント！！！");
+        } else if (60 < r && r <= 80) {
+          $("#total").text((total += 4));
+          fishname = "サバ";
+          fish_img = '<img src="img/saba.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("４ポイント！！！");
+        } else if (80 < r && r <= 100) {
+          $("#total").text((total += 0));
+          fishname = "クラゲ";
+          fish_img = '<img src="img/kurage.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("０ポイント！！？");
+        }
+      });
+
+      // rod2を選んだ場合
+      $(".rod2").on("click", function () {
+        $("#pattern_a").hide();
+        $("#point").show();
+        $(".button").show();
+        // 出る確率を変える
+        let r = Math.ceil(Math.random() * 100);
+        let fishname = "";
+        let fish_img = "";
+
+        if (0 < r && r <= 10) {
+          $("#total").text((total += 8));
+          fishname = "クロダイ";
+          fish_img = '<img src="img/kurodai.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("８ポイント！！！");
+        } else if (10 < r && r <= 50) {
+          $("#total").text((total += 3));
+          fishname = "ボラ";
+          fish_img = '<img src="img/bora.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("３ポイント！！！");
+        } else if (50 < r && r <= 70) {
+          $("#total").text((total += 7));
+          fishname = "メジナ";
+          fish_img = '<img src="img/mejina.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("７ポイント！！！");
+        } else if (70 < r && r <= 100) {
+          $("#total").text((total -= 10));
+          fishname = "自転車！？";
+          fish_img = '<img src="img/jitensya.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("-10ポイント😭");
+        }
+      });
+
+      // rod3を選んだ場合
+      $(".rod3").on("click", function () {
+        $("#pattern_b").hide();
+        $("#point").show();
+        $(".button").show();
+
+        // 出る確率を変える
+        let r = Math.ceil(Math.random() * 100);
+        let fishname = "";
+        let fish_img = "";
+
+        if (0 < r && r <= 20) {
+          $("#total").text((total += 6));
+          fishname = "シロギス";
+          fish_img = '<img src="img/shirogisu.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("６ポイント！！！");
+        } else if (20 < r && r <= 50) {
+          $("#total").text((total += 4));
+          fishname = "メゴチ";
+          fish_img = '<img src="img/megochi.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("４ポイント！！！");
+        } else if (50 < r && r <= 70) {
+          $("#total").text((total += 7));
+          fishname = "カレイ";
+          fish_img = '<img src="img/karei.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("７ポイント！！！");
+        } else if (70 < r && r <= 100) {
+          $("#total").text((total -= 5));
+          fishname = "長靴！？";
+          fish_img = '<img src="img/nagagutsu.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("-５ポイント😭");
+        }
+      });
+
+      // rod4を選んだ場合
+      $(".rod4").on("click", function () {
+        $("#pattern_b").hide();
+        $("#point").show();
+        $(".button").show();
+
+        // 出る確率を変える
+        let r = Math.ceil(Math.random() * 100);
+        let fishname = "";
+        let fish_img = "";
+
+        if (0 < r && r <= 10) {
+          $("#total").text((total += 10));
+          fishname = "ヒラメ";
+          fish_img = '<img src="img/hirame.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("１０ポイント！！！");
+        } else if (10 < r && r <= 40) {
+          $("#total").text((total += 8));
+          fishname = "スズキ";
+          fish_img = '<img src="img/suzuki.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("８ポイント！！！");
+        } else if (40 < r && r <= 90) {
+          $("#total").text((total += 8));
+          fishname = "マゴチ";
+          fish_img = '<img src="img/magochi.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("８ポイント！！！");
+        } else if (90 < r && r <= 100) {
+          $("#total").text((total += 50));
+          fishname = "マグロ！！！";
+          fish_img = '<img src="img/maguro.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("５０ポイント！！！");
+        }
+      });
+
+      // rod5を選んだ場合
+      $(".rod5").on("click", function () {
+        $("#pattern_c").hide();
+        $("#point").show();
+        $(".button").show();
+        // 出る確率を変える
+        let r = Math.ceil(Math.random() * 100);
+        let fishname = "";
+        let fish_img = "";
+        if (40 < r && r <= 30) {
+          $("#total").text((total += 2));
+          fishname = "ワカサギ";
+          fish_img = '<img src="img/wakasagi.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("２ポイント！！！");
+        } else if (30 < r && r <= 100) {
+          $("#total").text((total -= 5));
+          fishname = "長靴！？";
+          fish_img = '<img src="img/nagagutsu.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("-５ポイント😭");
+        }
+      });
+
+      // rod6を選んだ場合
+      $(".rod6").on("click", function () {
+        $("#pattern_c").hide();
+        $("#point").show();
+        $(".button").show();
+
+        //魚の出る確率を変えてみる
+        let r = Math.ceil(Math.random() * 100);
+        let fishname = "";
+        let fish_img = "";
+
+        if (0 < r && r <= 40) {
+          $("#total").text((total += 4));
+          fishname = "ブラックバス";
+          fish_img = '<img src="img/blackbass.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("４ポイント！！！");
+        } else if (40 < r && r <= 60) {
+          $("#total").text((total += 5));
+          fishname = "ニジマス";
+          fish_img = '<img src="img/nijimasu.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("５ポイント！！！");
+        } else if (60 < r && r <= 100) {
+          $("#total").text((total -= 10));
+          fishname = "自転車！？";
+          fish_img = '<img src="img/jitensya.png">';
+          $("#fishname").text(fishname);
+          $("#fish_img").html(fish_img);
+          $("#fish_point").text("-10ポイント😭");
+        }
+      });
+
+      // リトライ・リセットボタンを押した時の挙動
+      $(".button").click(function () {
+        $("#point").hide();
+        $("#pattern_a").hide();
+        $("#pattern_b").hide();
+        $("#pattern_c").hide();
+        $(".button").hide();
+        $("#first").show();
+      });
+
+      // リセットボタンを押した時の挙動
+      $("#reset_btn").click(function () {
+        location.reload();
+      });
+    </script>
+  </body>
+</html>
